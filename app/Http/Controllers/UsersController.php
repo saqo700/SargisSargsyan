@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\UserCreatedEvant;
 use App\Http\Requests\CreateUserRequest;
 use App\Models\User;
 
@@ -29,13 +30,12 @@ class UsersController extends Controller
         $data = $request->validated();
 
         $user = User::create($data);
+////        $imagePath = $data['img']->store('rofile_img');
+//
+//        $user->img_path = $imagePath;
+//        $user->save();
 
-
-        $imagePath = $data['img']->store('profile_img');
-
-        $user->img_path = $imagePath;
-        $user->save();
-
+        event(new UserCreatedEvant($user));
 
         return redirect()->route('login');
 
