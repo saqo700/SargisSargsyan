@@ -49,7 +49,7 @@ Route::group(['middleware' => ['loggedIn']], function () {
 
 Route::post('/login', [UsersController::class, 'postLogin']);
 
-Route::post('/signup', [UsersController::class, 'postSignup']);
+Route::post('/signup', [UsersController::class, 'store']);
 
 Route::post('/logout',[UsersController::class, 'postlogout']);
 
@@ -58,6 +58,9 @@ Route::post('/logout',[UsersController::class, 'postlogout']);
 Route::post('/product', [ProductController::class, 'postProduct']);
 
 Route::post('/cars', [ProductController::class, 'postCars']);
+
+Route::get('users/edit', [UsersController::class, 'edit'])->name('users.edit');
+Route::put('users', [UsersController::class, 'update']);
 
 
 
