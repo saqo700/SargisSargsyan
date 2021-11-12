@@ -6,6 +6,7 @@ use App\Http\Requests\CreateCarsRequest;
 use App\Models\Category;
 use App\Models\Product;
 
+use App\Services\ProductService;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
@@ -36,5 +37,19 @@ class ProductController extends Controller
 
         return redirect()->route('carslist');
 
+    }
+
+    public function getProdlist()
+    {
+        return view('product-list', [
+            'products' => (new ProductService())->getUserProduct(Auth::user()),
+            'cars'=>Cars::where('user_id',Auth::user()->id)->get()
+        ]);
+    }
+
+    public function getApiProdlist() {
+        return response()->json(
+            (new ProductService())->getUserProduct(Auth::user())
+        );
     }
 }

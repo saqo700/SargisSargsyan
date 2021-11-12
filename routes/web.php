@@ -39,7 +39,7 @@ Route::group(['middleware' => ['loggedIn']], function () {
 
     Route::get('/users-list', [MainController::class, 'getUserlist']);
 
-    Route::get('/product-list', [MainController::class, 'getProdlist'])->name('product-list');
+    Route::get('/product-list', [ProductController::class, 'getProdlist'])->name('product-list');
 
     Route::get('/carslist', [MainController::class, 'getCarslist'])->name('carslist');
 
